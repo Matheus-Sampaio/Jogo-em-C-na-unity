@@ -5,7 +5,7 @@ using UnityEngine;
 public class GrabCommand: Command
 {
     private bool grab;
-    public GrabCommand(bool grab=true, IMediator actorMediator=null): base(actorMediator)
+    public GrabCommand(bool grab, IMediator actorMediator=null): base(actorMediator)
     {
         this.grab = grab;
     }

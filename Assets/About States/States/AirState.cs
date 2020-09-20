@@ -34,6 +34,7 @@ public class AirState : State, INotifiable
     public override void OnEnter() 
     {
         if(stateMachine.previousState is WalkState) rb.AddForce(0, initialJumpForce, 0);
+        //else if(stateMachine.previousState is WallState) rb.AddForce(new Vector3(0, initialJumpForce, 0) - rb.transform.forward * 200);
     } 
     public override void OnExit() {}
     //mesmo código que o WalkState... isso viola o DRY, talvez eu encapsule isso mais tarde como MoveBehavior ou sei lá.

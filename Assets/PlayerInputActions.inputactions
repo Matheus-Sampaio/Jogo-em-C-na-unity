@@ -15,9 +15,9 @@
                 },
                 {
                     "name": "Grab",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "0cdd8fe9-81fc-423a-8547-90e24564702f",
-                    "expectedControlType": "Digital",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },

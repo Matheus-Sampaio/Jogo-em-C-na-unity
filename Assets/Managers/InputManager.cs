@@ -15,9 +15,12 @@ public class InputManager : MonoBehaviour
     }
     public void OnGrab(InputAction.CallbackContext callbackContext)
     {
+        if(callbackContext.started) commandManager.SetGrabCommand(true);
+        if(callbackContext.canceled) commandManager.SetGrabCommand(false);
     }
     public void OnJump(InputAction.CallbackContext callbackContext)
     {
+        Debug.Log("INputManager OnJump");
         commandManager.SetJumpCommand(true);
     }
 }

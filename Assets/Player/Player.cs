@@ -2,23 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//essa seria a classe que dá a "liga" pra todas as outras que compõem o jogador, isso seria basicamente
-//o padrão "Mediator", mas receio que isso acabe virando um GOD OBJECT aka uma classe monolitica entupida de coisa
+//Essa classe não está fazendo nada de útil, apenas delegando pro state, ela é "preguiçosa" e isso é um code smell
+//talvez valha a pena retira-la ou transferir todo o código de PlayerMediator pra cá.
 public class Player : MonoBehaviour, ICharacter
 {
-    private InputManager inputManager;
     private StateMachine stateMachine;
-    private PlayerStats playerStats;
-    private Animator animator;
-    private Rigidbody rb;
     public CommandManager commandManager;
     void Start()
     {
-        TryGetComponent<Animator>(out animator);
-        TryGetComponent<StateMachine>(out stateMachine);
-        TryGetComponent<PlayerStats>(out playerStats);
-        TryGetComponent<CommandManager>(out commandManager);
-        TryGetComponent<Rigidbody>(out rb);
+        stateMachine=GetComponent<StateMachine>();
+        commandManager=GetComponent<CommandManager>();
         stateMachine.Init(stateMachine.walkState); //give the default state here
     }
 
@@ -34,8 +27,8 @@ public class Player : MonoBehaviour, ICharacter
     //funcões de ICharacter, que são chamadas por comandos:
     public void Jump(bool j)
     {
-        stateMachine.DoJump(j);
-        //mais logica de pulo aqui, como setar a animação
+        Debug.Log("Player jump");
+        stateMachine?.DoJump(j);
     }
     public void Move(Vector2 v)
     {
@@ -43,7 +36,7 @@ public class Player : MonoBehaviour, ICharacter
     }
     public void Grab(bool g)
     {
-
+        stateMachine?.DoGrab(g);
     }
     public void Die()
     {

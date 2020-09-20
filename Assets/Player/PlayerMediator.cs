@@ -12,11 +12,13 @@ public class PlayerMediator : MonoBehaviour, IMediator
     Rigidbody rb;
     private void Start()
     {
-        TryGetComponent<Animator>(out animator);
-        TryGetComponent<ICharacter>(out player);
-        TryGetComponent<StateMachine>(out stateMachine);
-        TryGetComponent<CollisionManager>(out collisionManager);
-        TryGetComponent<Rigidbody>(out rb);
+        
+        animator=GetComponent<Animator>();
+        player=GetComponent<ICharacter>();
+        stateMachine=GetComponent<StateMachine>();
+        collisionManager=GetComponent<CollisionManager>();
+        rb=GetComponent<Rigidbody>();
+        //rb.freezeRotation = true;
     }
     public void Notify(Command command, params object[] args)
     {
@@ -29,6 +31,7 @@ public class PlayerMediator : MonoBehaviour, IMediator
                 Jump((bool)args[0]);
                 break;
             case GrabCommand gc:
+                Grab((bool)args[0]);
                 break;
             default:
                 break;
@@ -38,12 +41,11 @@ public class PlayerMediator : MonoBehaviour, IMediator
     public void Notify(CollisionManager collisionManager, params object[] args)
     {
         stateMachine.OnNotify(collisionManager, args);
-        if((string)args[0] == "Ground")
+        /*if((string)args[0] == "Ground")
         {
             Debug.Log("Collision With Ground Detected");
             if((bool)args[1])
             {
-                Debug.Log("Entering");
                 animator.SetTrigger("ToGround");
             }
             else
@@ -51,7 +53,7 @@ public class PlayerMediator : MonoBehaviour, IMediator
                 Debug.Log("Exiting");
                 animator.SetTrigger("ToAir");
             }
-        }
+        }*/
     }
 
     public void Notify(PlayerStats playerStats, params object[] args) => ProcessPlayerStats(playerStats, args);
@@ -67,8 +69,21 @@ public class PlayerMediator : MonoBehaviour, IMediator
     }
     private void Jump(bool j)
     {
+        Debug.Log("PlayerMediator Jump");
         player?.Jump(j);
-        animator?.SetTrigger("ToAir");
+        //animator?.SetTrigger("ToAir");
+    }
+    private void Grab(bool g)
+    {
+        if(g && collisionManager.walls.Count > 0 && !(stateMachine.currentState is WallState)) stateMachine.SetState(stateMachine.wallState);
+        if(!g)
+        {
+            if(stateMachine.currentState is WallState)
+            {
+                if(collisionManager.grounds.Count > 0) stateMachine.SetState(stateMachine.walkState);
+                else stateMachine.SetState(stateMachine.airState);
+            }
+        }
     }
     private void ProcessStateMachine(StateMachine stateMachine, params object[] args)
     {

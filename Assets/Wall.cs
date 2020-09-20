@@ -13,6 +13,7 @@ public class Wall : MonoBehaviour
     }
     public Vector3 GetVectorToWall(Vector3 v)
     {
-        return coll.ClosestPointOnBounds(v) - v;
+        return coll.ClosestPoint(v) - v;
+        
     }
 }

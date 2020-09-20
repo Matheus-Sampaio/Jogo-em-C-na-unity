@@ -68,6 +68,7 @@
     <Compile Include="Assets\About States\States\State.cs" />
     <Compile Include="Assets\About States\States\WalkState.cs" />
     <Compile Include="Assets\About States\States\WallState.cs" />
+    <Compile Include="Assets\Anim.cs" />
     <Compile Include="Assets\Camera.cs" />
     <Compile Include="Assets\Commands\Command.cs" />
     <Compile Include="Assets\Commands\GrabCommand.cs" />
@@ -617,8 +618,17 @@
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>C:/Users/farof/State/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.ProBuilder">
+      <HintPath>C:/Users/farof/State/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.InputSystem">
       <HintPath>C:/Users/farof/State/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProBuilder.Editor">
+      <HintPath>C:/Users/farof/State/Library/ScriptAssemblies/Unity.ProBuilder.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
+      <HintPath>C:/Users/farof/State/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/farof/State/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
@@ -634,6 +644,9 @@
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>C:/Users/farof/State/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProBuilder.AddOns.Editor">
+      <HintPath>C:/Users/farof/State/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>C:/Users/farof/State/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>

@@ -11,17 +11,25 @@ public class StateMachine: MonoBehaviour, INotifiable
     public WalkState walkState { get; private set; }
     public AirState airState { get; private set; }
     public WallState wallState { get; private set; }
-    public void Awake()
+    void Awake()
     {
         walkState = new WalkState(this);
         airState = new AirState(this);
         wallState = new WallState(this);
     }
-    public void Start()
+    void Start()
     {
         currentState = walkState;
         string s = "This " + this.gameObject.name + "'s State Machine could not find the IMediator Component!";
         if(!TryGetComponent<IMediator>(out characterMediator)) Debug.Log(s);
+    }
+    void Update()
+    {
+        currentState?.LogicUpdate();
+    }
+    void FixedUpdate()
+    {
+        currentState?.PhysicsUpdate();
     }
     public void Init(State state)
     {
@@ -36,7 +44,7 @@ public class StateMachine: MonoBehaviour, INotifiable
         currentState = state;
         previousState?.OnExit();
         currentState?.OnEnter();
-        characterMediator.Notify(this, currentState);
+        characterMediator.Notify(this, currentState); //notificar mediador que o estado mudou
     }
     public void DoMove(Vector2 v)
     {
@@ -45,6 +53,10 @@ public class StateMachine: MonoBehaviour, INotifiable
     public void DoJump(bool j)
     {
         currentState?.Jump();
+    }
+    public void DoGrab(bool g)
+    {
+        currentState?.Grab(g);
     }
     public void OnNotify(object sender, params object[] args)
     {
