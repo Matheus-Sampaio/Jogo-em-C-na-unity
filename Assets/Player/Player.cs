@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +18,7 @@ public class Player : MonoBehaviour, ICharacter
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(transform.position,transform.forward,Color.blue);
+        //Debug.DrawRay(transform.position,transform.forward,Color.blue);
     }
     void FixedUpdate()
     {
@@ -27,7 +27,6 @@ public class Player : MonoBehaviour, ICharacter
     //funcões de ICharacter, que são chamadas por comandos:
     public void Jump(bool j)
     {
-        Debug.Log("Player jump");
         stateMachine?.DoJump(j);
     }
     public void Move(Vector2 v)

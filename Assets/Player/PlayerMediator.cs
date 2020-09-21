@@ -18,7 +18,7 @@ public class PlayerMediator : MonoBehaviour, IMediator
         stateMachine=GetComponent<StateMachine>();
         collisionManager=GetComponent<CollisionManager>();
         rb=GetComponent<Rigidbody>();
-        //rb.freezeRotation = true;
+        rb.freezeRotation = true;
     }
     public void Notify(Command command, params object[] args)
     {
